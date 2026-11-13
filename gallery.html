@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#11152b" />
+  <title>Gallery | Hello, world!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root { color-scheme:dark; --ink:#f5f4ff; --muted:#aaa9c4; --mint:#9df3d0; }
+    * { box-sizing:border-box; }
+    body { min-height:100vh; margin:0; display:grid; place-items:center; padding:100px 20px 40px; overflow-x:hidden; color:var(--ink); font-family:'DM Sans',sans-serif; background:radial-gradient(ellipse at 17% 15%,#53429655 0,transparent 38%),radial-gradient(ellipse at 85% 82%,#206e6950 0,transparent 36%),#11152b; }
+    body::before,body::after { position:fixed; z-index:-1; content:''; width:380px; height:380px; border:1px solid #ffffff12; border-radius:50%; animation:drift 16s ease-in-out infinite alternate; }
+    body::before { top:-205px; right:7%; box-shadow:0 0 0 35px #ffffff08,0 0 0 70px #ffffff05; } body::after { bottom:-250px; left:5%; width:460px; height:460px; animation-delay:-7s; }
+    .site-nav { position:fixed; z-index:2; top:22px; left:50%; display:flex; gap:4px; padding:6px; border:1px solid #ffffff1c; border-radius:999px; background:#11152bdb; backdrop-filter:blur(14px); transform:translateX(-50%); }
+    .site-nav a { padding:9px 14px; color:#aaa9c4; font-size:13px; text-decoration:none; border-radius:999px; transition:color .2s,background .2s; white-space:nowrap; }
+    .site-nav a:hover,.site-nav a[aria-current="page"] { color:var(--ink); background:#ffffff15; }
+    .site-nav a:focus-visible { outline:2px solid var(--mint); outline-offset:4px; }
+    .gallery { width:min(100%,980px); padding:clamp(28px,6vw,58px); border:1px solid #ffffff20; border-radius:30px; background:linear-gradient(145deg,#ffffff12,#ffffff06 58%,#ffffff09); box-shadow:0 30px 100px #05081670,inset 0 1px #ffffff18; backdrop-filter:blur(18px); animation:rise .85s cubic-bezier(.2,.8,.2,1) both; }
+    .eyebrow { margin:0 0 12px; color:var(--mint); font-size:11px; font-weight:700; letter-spacing:.22em; text-align:center; text-transform:uppercase; }
+    h1 { margin:0; font-family:'Manrope',sans-serif; font-size:clamp(2.8rem,8vw,5rem); font-weight:800; letter-spacing:-.075em; line-height:1; text-align:center; }
+    h1 span { color:transparent; background:linear-gradient(100deg,#c7b4ff 15%,#9df3d0 92%); background-clip:text; -webkit-background-clip:text; }
+    .intro { max-width:500px; margin:17px auto 34px; color:var(--muted); font-size:16px; line-height:1.7; text-align:center; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .item { min-width:0; }
+    .art { position:relative; display:grid; aspect-ratio:1.18; overflow:hidden; place-items:center; border:1px solid #ffffff20; border-radius:20px; box-shadow:inset 0 1px #ffffff25; }
+    .art::before,.art::after { position:absolute; content:''; border-radius:50%; }
+    .art-1 { background:radial-gradient(circle at 30% 32%,#ffd6b7 0 5%,transparent 6%),linear-gradient(145deg,#f47c8c,#8b5cf6 54%,#2f3b83); }
+    .art-1::before { width:58%; aspect-ratio:1; background:linear-gradient(140deg,#ffe3b0,#fa8a92 55%,#a866dd); box-shadow:0 18px 50px #281c6366; }
+    .art-1::after { width:90%; height:25%; bottom:-13%; background:#252b65aa; filter:blur(10px); }
+    .art-2 { background:radial-gradient(ellipse at 50% 115%,#edb18b,transparent 48%),linear-gradient(155deg,#173e58,#40a58f 52%,#c6dfb6); }
+    .art-2::before { width:42%; height:74%; bottom:-18%; border-radius:50% 50% 12% 12%; background:linear-gradient(90deg,#285b64,#69c4a0,#255b65); box-shadow:0 0 0 8px #ffffff18; }
+    .art-2::after { width:24%; aspect-ratio:1; top:13%; background:#ffe3a6; box-shadow:0 0 40px #ffe3a6aa; }
+    .art-3 { background:linear-gradient(145deg,#e4a0bd,#8b7bd7 55%,#35527c); }
+    .art-3::before { width:72%; aspect-ratio:1; border:1px solid #fff9; background:repeating-conic-gradient(from 8deg,#fce2c7 0 12deg,#ea8da7 12deg 24deg); box-shadow:0 0 0 9px #ffffff22,0 20px 40px #25204d66; }
+    .art-3::after { width:18%; aspect-ratio:1; background:#fdf0d3; box-shadow:0 0 20px #fff8; }
+    .art-4 { background:linear-gradient(160deg,#19264d,#356d83 55%,#93c7a8); }
+    .art-4::before { width:76%; height:55%; bottom:7%; border-radius:48% 52% 8% 8%; background:linear-gradient(170deg,#f3a97b,#c66983 48%,#433d7d); clip-path:polygon(50% 0,100% 100%,0 100%); }
+    .art-4::after { width:160%; height:22%; bottom:-5%; background:#142d49cc; filter:blur(9px); }
+    .art-5 { background:radial-gradient(circle at 50% 40%,#a8f4d8,#45a99e 34%,#344779 75%); }
+    .art-5::before { width:55%; aspect-ratio:1; border:1px solid #ffffffaa; background:linear-gradient(145deg,#e7fff0aa,#7fdac488); box-shadow:0 0 0 10px #ffffff12,0 0 45px #a5ffe677; transform:rotate(35deg); border-radius:28%; }
+    .art-5::after { width:18%; aspect-ratio:1; background:#fff3ce; box-shadow:0 0 22px #fff3ce; }
+    .art-6 { background:radial-gradient(ellipse at 50% 100%,#f3c57d,transparent 40%),linear-gradient(145deg,#473b83,#b86ca4 55%,#f4a98b); }
+    .art-6::before { width:65%; aspect-ratio:1; top:12%; background:linear-gradient(140deg,#f8c6c0,#bf8bd0 60%,#706bc1); box-shadow:0 15px 45px #30275c77; }
+    .art-6::after { width:120%; height:28%; bottom:-12%; background:#43376d99; filter:blur(8px); }
+    .item h2 { margin:12px 2px 0; color:#eae8fa; font-size:14px; font-weight:600; }
+    .item p { margin:4px 2px 0; color:#8f8da9; font-size:12px; }
+    @keyframes rise { from { opacity:0; transform:translateY(18px) scale(.985); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes drift { to { transform:translate(24px,18px) rotate(15deg); } }
+    @media(max-width:650px) { .gallery { padding:30px 22px; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; } }
+    @media(max-width:390px) { .site-nav { gap:0; } .site-nav a { padding:9px 10px; font-size:12px; } }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; } }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="gallery.html" aria-current="page">Gallery</a>
+  </nav>
+  <main class="gallery">
+    <p class="eyebrow">Collected moments</p>
+    <h1>A little <span>inspiration.</span></h1>
+    <p class="intro">A handful of color, light, and little things worth pausing for.</p>
+    <section class="grid" aria-label="Gallery artwork">
+      <article class="item"><div class="art art-1" role="img" aria-label="Abstract sunset orb in pink and violet"></div><h2>Soft horizons</h2><p>Warmth at the edge of day</p></article>
+      <article class="item"><div class="art art-2" role="img" aria-label="Stylized green landscape under a glowing sun"></div><h2>Quiet mornings</h2><p>A breath of fresh air</p></article>
+      <article class="item"><div class="art art-3" role="img" aria-label="Radiating pastel sunburst pattern"></div><h2>Golden hour</h2><p>Light in every direction</p></article>
+      <article class="item"><div class="art art-4" role="img" aria-label="Geometric mountain at dusk"></div><h2>Faraway places</h2><p>Somewhere over the ridge</p></article>
+      <article class="item"><div class="art art-5" role="img" aria-label="Luminous mint glass shape"></div><h2>Small wonders</h2><p>Find the glow within</p></article>
+      <article class="item"><div class="art art-6" role="img" aria-label="Dreamlike lavender and coral abstract scene"></div><h2>Daydreams</h2><p>A moment to drift</p></article>
+    </section>
+  </main>
+</body>
+</html>
